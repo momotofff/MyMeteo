@@ -24,6 +24,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SensorRegistrationResponse'
+
+    get:
+      summary: Получение всех измерений
+      responses:
+        '200':
+          description: Список всех измерений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeasurementResponse'
+
+  /measurements/rainyDaysCount:
+    get:
+      summary: Подсчет количества дождливых дней
+      responses:
+        '200':
+          description: Количество дождливых дней
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+                description: "Количество дней с осадками"
+
   /measurements:
     post:
       summary: Добавление нового измерения
