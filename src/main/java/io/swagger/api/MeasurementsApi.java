@@ -35,7 +35,8 @@ import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-01-14T09:57:24.496581260Z[GMT]")
 @Validated
-public interface MeasurementsApi {
+public interface MeasurementsApi
+{
 
     @Operation(summary = "Добавление нового измерения", description = "", tags={  })
     @ApiResponses(value = { 

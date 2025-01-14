@@ -9,10 +9,11 @@ import io.swagger.v3.oas.models.info.License;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-01-14T09:57:24.496581260Z[GMT]")
 @Configuration
-public class SwaggerDocumentationConfig {
-
+public class SwaggerDocumentationConfig
+{
     @Bean
-    public OpenAPI openApi() {
+    public OpenAPI openApi()
+    {
         return new OpenAPI()
             .info(new Info()
                 .title("MyMeteo")
@@ -25,5 +26,4 @@ public class SwaggerDocumentationConfig {
                 .contact(new io.swagger.v3.oas.models.info.Contact()
                     .email("")));
     }
-
 }

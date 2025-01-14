@@ -35,8 +35,8 @@ import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-01-14T09:57:24.496581260Z[GMT]")
 @Validated
-public interface SensorsApi {
-
+public interface SensorsApi
+{
     @Operation(summary = "Регистрация нового сенсора", description = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "201", description = "Успешная регистрация сенсора", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SensorRegistrationResponse.class))) })

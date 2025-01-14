@@ -4,7 +4,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-01-14T09:57:24.496581260Z[GMT]")
 @javax.xml.bind.annotation.XmlRootElement
-public class ApiResponseMessage {
+public class ApiResponseMessage
+{
     public static final int ERROR = 1;
     public static final int WARNING = 2;
     public static final int INFO = 3;
@@ -17,7 +18,8 @@ public class ApiResponseMessage {
 
     public ApiResponseMessage(){}
 
-    public ApiResponseMessage(int code, String message){
+    public ApiResponseMessage(int code, String message)
+    {
         this.code = code;
         switch(code){
         case ERROR:
