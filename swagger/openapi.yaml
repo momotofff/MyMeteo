@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: MyMeteo
+  description: service for receiving data from the sensor on the OpenAPI 3.0 specification.
+  version: 1.0.0
+
+paths:
+  /sensors:
+    post:
+      summary: Регистрация нового сенсора
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sensor'
+      responses:
+        '201':
+          description: Успешная регистрация сенсора
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SensorRegistrationResponse'
+  /measurements:
+    post:
+      summary: Добавление нового измерения
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Measurement'
+      responses:
+        '201':
+          description: Успешное добавление измерения
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasurementResponse'
+components:
+  schemas:
+    Sensor:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Имя сенсора"
+      required:
+        - name
+
+    SensorRegistrationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "Идентификатор сенсора"
+        name:
+          type: string
+          description: "Имя сенсора"
+
+    MeasurementResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "Идентификатор измерения"
+        value:
+          type: number
+          format: float
+          description: "Значение температуры"
+        raining:
+          type: boolean
+          description: "Флаг, указывающий на наличие осадков"
+        sensor:
+          $ref: '#/components/schemas/Sensor'
+
+    Measurement:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          description: "Значение температуры"
+        raining:
+          type: boolean
+          description: "Флаг, указывающий на наличие осадков"
+        sensor:
+          $ref: '#/components/schemas/Sensor'
+      required:
+        - value
+        - raining
+        - sensor
