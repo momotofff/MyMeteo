@@ -3,6 +3,9 @@ info:
   title: MyMeteo
   description: service for receiving data from the sensor on the OpenAPI 3.0 specification.
   version: 1.0.0
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 paths:
   /sensors:
