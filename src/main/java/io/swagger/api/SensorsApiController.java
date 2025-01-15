@@ -1,9 +1,10 @@
 package java.io.swagger.api;
 
-import java.io.swagger.model.Sensor;
-import java.io.swagger.model.SensorRegistrationResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.api.SensorsApi;
 import io.swagger.model.MeasurementResponse;
+import io.swagger.model.Sensor;
+import io.swagger.model.SensorRegistrationResponse;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.swagger.services.SensorService;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-01-14T09:57:24.496581260Z[GMT]")
@@ -26,50 +28,49 @@ public class SensorsApiController implements SensorsApi
     private static final Logger log = LoggerFactory.getLogger(SensorsApiController.class);
     private final ObjectMapper objectMapper;
     private final HttpServletRequest request;
+    private final SensorService sensorService;
 
     @Autowired
-    public SensorsApiController(ObjectMapper objectMapper, HttpServletRequest request)
+    public SensorsApiController(ObjectMapper objectMapper, HttpServletRequest request, SensorService sensorService)
     {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.sensorService = sensorService;
     }
 
     @Override
-    public ResponseEntity<List<MeasurementResponse>> sensorsGet()
-    {
+    public ResponseEntity<List<MeasurementResponse>> sensorsGet() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<MeasurementResponse>>(objectMapper.readValue("[ {\n  \"raining\" : true,\n  \"sensor\" : {\n    \"name\" : \"name\"\n  },\n  \"id\" : 0,\n  \"value\" : 6.0274563\n}, {\n  \"raining\" : true,\n  \"sensor\" : {\n    \"name\" : \"name\"\n  },\n  \"id\" : 0,\n  \"value\" : 6.0274563\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<MeasurementResponse>>(HttpStatus.INTERNAL_SERVER_ERROR);
+                List<MeasurementResponse> measurements = sensorService.getAllMeasurements(); // получить данные сенсора
+                return new ResponseEntity<>(measurements, HttpStatus.OK);
+            } catch (Exception e) {
+                log.error("Ошибка при получении измерений", e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<List<MeasurementResponse>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @Override
     public ResponseEntity<SensorRegistrationResponse> sensorsPost(
-            @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema())
-            @Valid @RequestBody Sensor body
-) {
+            @Parameter(name = "Sensor", description = "", required = true)
+            @Valid @RequestBody Sensor sensor
+    ) {
         String accept = request.getHeader("Accept");
 
-        if (accept != null && accept.contains("application/json"))
-        {
-            try
-            {
-                return new ResponseEntity<SensorRegistrationResponse>(objectMapper.readValue("{\n  \"name\" : \"name\",\n  \"id\" : 0\n}", SensorRegistrationResponse.class), HttpStatus.NOT_IMPLEMENTED);
-            }
-            catch (IOException e)
-            {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<SensorRegistrationResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                SensorRegistrationResponse response = sensorService.registerSensor(sensor); // Регистрация сенсора
+                return new ResponseEntity<>(response, HttpStatus.CREATED);
+            } catch (Exception e) {
+                log.error("Ошибка при регистрации сенсора", e);
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<SensorRegistrationResponse>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }

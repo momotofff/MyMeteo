@@ -1,14 +1,20 @@
-CREATE TABLE users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255),
-    password VARCHAR(255),
-    email VARCHAR(255)
+CREATE TABLE Users (
+    id          BIGINT      PRIMARY KEY,
+    username    TEXT        NOT NULL UNIQUE,
+    email       TEXT        NOT NULL UNIQUE
 );
 
 CREATE TABLE sensors (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255),
-    password VARCHAR(255),
-    email VARCHAR(255)
+    id          BIGINT      PRIMARY KEY,
+    name        TEXT        NOT NULL UNIQUE,
+    created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE measurements (
+    id          BIGINT      PRIMARY KEY,
+    sensor_id   BIGINT      REFERENCES sensors(id) ON DELETE CASCADE,
+    value       FLOAT       NOT NULL,
+    raining     BOOLEAN     NOT NULL,
+    created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP
 );
 
