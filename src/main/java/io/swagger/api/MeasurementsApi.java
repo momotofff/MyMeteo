@@ -48,5 +48,13 @@ public interface MeasurementsApi
     ResponseEntity<MeasurementResponse> measurementsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody Measurement body
 );
 
+    @Operation(summary = "Подсчет количества дождливых дней", description = "", tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Количество дождливых дней", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))) })
+    @RequestMapping(value = "/measurements/rainyDaysCount",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<Integer> measurementsRainyDaysCountGet();
+
 }
 

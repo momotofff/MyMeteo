@@ -7,6 +7,8 @@ package java.io.swagger.api;
 
 import java.io.swagger.model.Sensor;
 import java.io.swagger.model.SensorRegistrationResponse;
+
+import io.swagger.model.MeasurementResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -37,6 +39,14 @@ import java.util.Map;
 @Validated
 public interface SensorsApi
 {
+    @Operation(summary = "Получение всех измерений", description = "", tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Список всех измерений", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = MeasurementResponse.class)))) })
+    @RequestMapping(value = "/sensors",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<List<MeasurementResponse>> sensorsGet();
+
     @Operation(summary = "Регистрация нового сенсора", description = "", tags={  })
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "201", description = "Успешная регистрация сенсора", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SensorRegistrationResponse.class))) })

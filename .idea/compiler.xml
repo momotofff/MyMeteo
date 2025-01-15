@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MyMeteo" target="11" />
+      <module name="MyMeteo" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
