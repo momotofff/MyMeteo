@@ -1,8 +1,9 @@
 package java.io.swagger.api;
 
-import java.io.swagger.model.Measurement;
-import java.io.swagger.model.MeasurementResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.api.MeasurementsApi;
+import io.swagger.model.Measurement;
+import io.swagger.model.MeasurementResponse;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,9 +32,11 @@ public class MeasurementsApiController implements MeasurementsApi {
     }
 
     @Override
-    public ResponseEntity<MeasurementResponse> measurementsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required = true, schema = @Schema())
-                                                                @Valid @RequestBody Measurement body
-    ) {
+    public ResponseEntity<MeasurementResponse> measurementsPost(
+            @Parameter(name = "Measurement", description = "", required = true)
+            @Valid @RequestBody Measurement measurement
+    )
+    {
         String accept = request.getHeader("Accept");
 
         if (accept != null && accept.contains("application/json")) {

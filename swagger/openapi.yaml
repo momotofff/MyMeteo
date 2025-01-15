@@ -96,6 +96,10 @@ components:
     Sensor:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
+          description: "Уникальный идентификатор сенсора"
         name:
           type: string
           description: "Имя сенсора"
@@ -107,7 +111,8 @@ components:
       properties:
         id:
           type: integer
-          description: "Идентификатор сенсора"
+          format: int64
+          description: "Уникальный идентификатор сенсора"
         name:
           type: string
           description: "Имя сенсора"
@@ -117,7 +122,8 @@ components:
       properties:
         id:
           type: integer
-          description: "Идентификатор измерения"
+          format: int64
+          description: "Уникальный идентификатор измерения"
         value:
           type: number
           format: float
@@ -131,6 +137,10 @@ components:
     Measurement:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
+          description: "Уникальный идентификатор измерения"
         value:
           type: number
           format: float
@@ -144,6 +154,7 @@ components:
         - value
         - raining
         - sensor
+
     User:
       type: object
       properties:
@@ -160,3 +171,7 @@ components:
           type: string
           description: "Электронная почта пользователя"
           example: "user@example.com"
+        password:
+          type: string
+          description: "Пароль пользователя"
+          example: "secret"

@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/swagger" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/openapi/swagger" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/db/init" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
