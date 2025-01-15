@@ -8,9 +8,7 @@ public class LocalDateTimeConverter implements Converter<String, LocalDateTime>
 {
     private final DateTimeFormatter formatter;
 
-    public LocalDateTimeConverter(String dateFormat) {
-        this.formatter = DateTimeFormatter.ofPattern(dateFormat);
-    }
+    public LocalDateTimeConverter(String dateFormat) { this.formatter = DateTimeFormatter.ofPattern(dateFormat); }
 
     @Override
     public LocalDateTime convert(String source)
