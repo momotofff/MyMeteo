@@ -11,11 +11,14 @@ import com.fasterxml.jackson.databind.Module;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.io.swagger.appsettings.AppSettings;
 import java.io.swagger.configuration.LocalDateConverter;
 import java.io.swagger.configuration.LocalDateTimeConverter;
+import java.io.swagger.services.DatabaseService;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "io.swagger", "io.swagger.api" , "io.swagger.configuration"})
@@ -35,6 +38,23 @@ public class Swagger2SpringBoot implements CommandLineRunner
     @Bean
     public Module jsonNullableModule() {
         return new JsonNullableModule();
+    }
+
+    @Bean
+    public AppSettings appSettings()
+    {
+        return new AppSettings();
+    }
+
+    @Bean
+    @DependsOn("appSettings")
+    public DatabaseService dbManager()
+    {
+        return new DatabaseService(
+                String.format("jdbc:postgresql://%s:%s/postgres", appSettings().getDbServerAddress(), appSettings().getDbServerPort()),
+                appSettings().getDbServerUser(),
+                appSettings().getDbServerPassword()
+        );
     }
 
     @Configuration

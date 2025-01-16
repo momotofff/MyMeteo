@@ -12,9 +12,8 @@ CREATE TABLE sensors (
 
 CREATE TABLE measurements (
     id          BIGINT      PRIMARY KEY,
-    sensor_id   BIGINT      REFERENCES sensors(id) ON DELETE CASCADE,
+    sensor_id   BIGINT      REFERENCES sensors(id),
     value       FLOAT       NOT NULL,
-    raining     BOOLEAN     NOT NULL,
-    created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP
+    raining     BOOLEAN     NOT NULL
 );
 
