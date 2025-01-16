@@ -23,13 +23,13 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
- * Deserializer for ThreeTen temporal {@link Instant}s, {@link OffsetDateTime}, and {@link ZonedDateTime}s.
+ * Deserializer for ThreeTen temporal {@link org.threeten.bp.Instant}s, {@link org.threeten.bp.OffsetDateTime}, and {@link org.threeten.bp.ZonedDateTime}s.
  * Adapted from the jackson threetenbp InstantDeserializer to add support for deserializing rfc822 format.
  *
  * @author Nick Williams
  */
-public class CustomInstantDeserializer<T extends Temporal> extends ThreeTenDateTimeDeserializerBase<T>
-{
+public class CustomInstantDeserializer<T extends Temporal>
+    extends ThreeTenDateTimeDeserializerBase<T> {
   private static final long serialVersionUID = 1L;
 
   public static final CustomInstantDeserializer<Instant> INSTANT = new CustomInstantDeserializer<Instant>(
