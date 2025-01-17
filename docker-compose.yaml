@@ -40,6 +40,21 @@ services:
       start_period: 10s
     restart: unless-stopped
 
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_DEFAULT_EMAIL: "admin@mail.ru"    # без этих строк
+      PGADMIN_DEFAULT_PASSWORD: "admin"         # контейнер не запускается
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "8083:80"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
   my-meteo:
     container_name: my-meteo
     build:
@@ -52,3 +67,6 @@ services:
     restart: no
     depends_on:
       - postgres
+
+volumes:
+  pgadmin-data:
