@@ -3,7 +3,6 @@ package com.example.swagger.services;
 import io.swagger.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.regex.Pattern;
 
-@Service
 public class UserService
 {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);

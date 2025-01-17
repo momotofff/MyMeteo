@@ -1,7 +1,6 @@
 package com.example.swagger.services;
 
 import io.swagger.model.Measurement;
-import io.swagger.model.User;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;

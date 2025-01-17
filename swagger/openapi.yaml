@@ -135,6 +135,9 @@ components:
 
     CreateUserRequest:
       type: object
+      required:
+        - username
+        - email
       properties:
         username:
           type: string
@@ -142,12 +145,12 @@ components:
         email:
           type: string
           example: "user@example.com"
-      required:
-        - username
-        - email
+
 
     Sensor:
       type: object
+      required:
+        - name
       properties:
         id:
           type: integer
@@ -156,11 +159,14 @@ components:
         name:
           type: string
           description: "Имя сенсора"
-      required:
-        - name
+
 
     Measurement:
       type: object
+      required:
+        - value
+        - raining
+        - sensor
       properties:
         value:
           type: number
@@ -171,7 +177,3 @@ components:
           description: "Флаг, указывающий на наличие осадков"
         sensor:
           $ref: '#/components/schemas/Sensor'
-      required:
-        - value
-        - raining
-        - sensor
