@@ -19,7 +19,7 @@ import com.example.swagger.appsettings.AppSettings;
 import com.example.swagger.services.DatabaseService;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.swagger", "com.example.swagger.api", "com.example.swagger.configuration", "com.example.swagger.model", "com.example.swagger.services"})
+@ComponentScan(basePackages = {"com.example.swagger", "com.example.swagger.api", "com.example.swagger.configuration", "io.swagger.model", "com.example.swagger.services", "com.example.swagger.appsettings"})
 public class Swagger2SpringBoot implements CommandLineRunner
 {
     @Override

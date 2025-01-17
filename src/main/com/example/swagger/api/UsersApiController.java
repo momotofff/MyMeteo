@@ -39,7 +39,7 @@ public class UsersApiController implements UsersApi
     @Override
     public ResponseEntity<User> usersRegisterPost(
             @Parameter(name = "CreateUserRequest", description = "", required = true)
-            @Valid @RequestBody CreateUserRequest createUserRequest
+            @Valid @RequestBody CreateUserRequest body
     )  {
         String accept = request.getHeader("Accept");
 
@@ -47,8 +47,8 @@ public class UsersApiController implements UsersApi
         {
             try
             {
-                User createdUser = databaseService.usersRegisterPost(createUserRequest.getUsername(), createUserRequest.getEmail());
-                logger.info("Successfully created user with username: {}", createUserRequest.getUsername());
+                User createdUser = databaseService.usersRegisterPost(body.getUsername(), body.getEmail());
+                logger.info("Successfully created user with username: {}", body.getUsername());
                 return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
             }
 
