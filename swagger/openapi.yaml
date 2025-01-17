@@ -1,22 +1,29 @@
 openapi: 3.0.0
 info:
   title: MyMeteo
-  description: service for receiving data from the sensor on the OpenAPI 3.0 specification.й.
+  description: Service for receiving data from the sensor on the OpenAPI 3.0 specification.й.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 
+servers:
+  - url: http://localhost:9000/api/v1
+    description: Dev server
+
 paths:
-  /users/register:
+  /users:
     post:
+      operationId: usersRegisterPost
       summary: Регистрация нового пользователя
+      tags:
+        - User
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/CreateUserRequest'
       responses:
         '201':
           description: Успешная регистрация пользователя
@@ -34,7 +41,10 @@ paths:
 
   /sensors:
     post:
+      operationId: sensorsPost
       summary: Регистрация нового сенсора
+      tags:
+        - Sensor
       requestBody:
         required: true
         content:
@@ -50,7 +60,10 @@ paths:
                 $ref: '#/components/schemas/Sensor'
 
     get:
+      operationId: sensorsGet
       summary: Получение всех сенсоров
+      tags:
+        - Sensor
       responses:
         '200':
           description: Список всех сенсоров
@@ -63,7 +76,10 @@ paths:
 
   /measurements/rainyDaysCount:
     get:
+      operationId: measurementsRainyDaysCountGet
       summary: Подсчет количества дождливых дней
+      tags:
+        - Measurement
       responses:
         '200':
           description: Количество дождливых дней
@@ -76,7 +92,10 @@ paths:
 
   /measurements:
     post:
+      operationId: measurementsPost
       summary: Добавление нового измерения
+      tags:
+        - Measurement
       requestBody:
         required: true
         content:
@@ -112,11 +131,20 @@ components:
         password:
           type: string
           description: "Пароль пользователя"
-          example: "secret"
+          example: "password123"
+
+    CreateUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "username"
+        email:
+          type: string
+          example: "user@example.com"
       required:
         - username
         - email
-        - password
 
     Sensor:
       type: object
